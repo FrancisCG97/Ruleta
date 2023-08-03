@@ -5,7 +5,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 const Header = () => {
 
     return (
-        <h1>Ruleta</h1>
+        <h1>Ruleta al azarrrr</h1>
     )
 }
 
