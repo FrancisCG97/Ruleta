@@ -1,3 +1,15 @@
+
+body {
+    background-color: #FBFFCC;
+}
+
+
+
+
 h1 {
+    font-family: 'Exo', sans-serif;
     color: black;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
 }
