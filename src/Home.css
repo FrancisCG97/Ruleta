@@ -16,18 +16,27 @@ body {
     background-color: #FBFFCC;
 }
 
+.container {
+    margin: 0%;
+    padding: 0%;
+}
+
+.row {
+    padding: 0%;
+}
+
 
 /* ------------HOME------------ */
 
 /* ------------HEADER------------ */
 .btn.btn-lg {
-    width: 100%;
+    width: 100vw;
     height: 100%;
-    padding: 3%;
+    padding: 1%;
     background-color: #DDC996;
     font-family: 'Exo', sans-serif;
     font-weight: bold;
-    font-size: 3vh;
+    font-size: 200%;
     border-radius: 0%;
 }
 
@@ -41,10 +50,10 @@ body {
 
 /* ------------TITLE------------ */
 h1 {
-    margin-top: 3%;
+    margin-top: 2%;
     font-family: 'Exo', sans-serif;
     font-weight: bold;
-    font-size: 5vh;
+    font-size: 300%;
     color: black;
     display: flex;
     justify-content: center;
@@ -52,26 +61,43 @@ h1 {
 
 
 /* ------------ROULETTE------------ */
-.sc-gsTCUz.bhdLno{
+.sc-gsTCUz.bhdLno {
     width: 100%;
     margin: 0%;
     display: flex;
     justify-content: center;
     position: relative;
-    z-index: 0;
+    z-index: 1;
+}
+
+.sc-dlfnbm.eHDRee,
+.sc-dlfnbm.hMPOUo.started-spinning{
+    width: 75%;
+}
+
+.sc-bdfBwQ.sc-hKgILt.cIKpxU.gTLZXx {
+    width: 21%;
 }
 
 .sc-eCssSg.hmocIu {
     width: 80%;
     height: auto;
-    display: flex;
-    justify-content: center;
     pointer-events: none;
     z-index: 0;
 }
 
+.img-thumbnail {
+    background-color: #EFE5A9;
+    height: 10vh;
+}
+
+.card-body {
+    margin: 0%;
+    padding: 3% 7% 3% 7%;
+}
+
 #wheel {
-    width: 100vw;
+    width: 100%;
     margin: 0%;
     padding: 0%;
 }
@@ -80,40 +106,63 @@ h1 {
     width: 100vw;
     margin: 0%;
     padding: 0%;
+    display: flex;
+    justify-content: center;
 }
 
 #grids {
     width: 100vw;
     margin: 0%;
     padding: 0%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row-reverse;
 }
 
 #buttons-container {
-    width: 100vw;
+    width: 40%;
     padding: 0%;
+    margin: 0%;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 #spin {
     width: 35vw;
     height: 11vh;
     background-color: #BDF3AE;
+    border-radius: 15%;
+    border-color: black;
+    border-width: medium;
+    font-family: 'Exo', sans-serif;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+#input-file {
+    width: 35vw;
+    height: 28vh;
+    background-color: #EFE5A9;
     border-radius: 10%;
     border-color: black;
     border-width: medium;
     font-family: 'Exo', sans-serif;
+    font-size: x-large;
     font-weight: bold;
+    background-image: "upload.png";
 }
 
 #return-original {
     width: 35vw;
     height: 11vh;
     background-color: #F67975;
-    border-radius: 10%;
+    border-radius: 15%;
     border-color: black;
     border-width: medium;
     font-family: 'Exo', sans-serif;
+    font-size: x-large;
     font-weight: bold;
 }
 
