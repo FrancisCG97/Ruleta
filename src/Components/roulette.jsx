@@ -6,54 +6,33 @@ import readXlsxFile from 'read-excel-file'
 import { useState } from "react";
 import { Wheel } from 'react-custom-roulette'
 import { ToastContainer, toast } from 'react-toastify';
+import XLSX from 'xlsx';
 
 const Roulette = () => {
-
-    //FUNCIÓN PARA RECIBIR DATOS DESDE UN EXCEL
-    // File.
-    // const input = document.getElementById('input');
-    // input.addEventListener('change', () => {
-    //     readXlsxFile(input.files[0]).then((rows) => {
-    //         // `rows` is an array of rows
-    //         // each row being an array of cells.
-    //     })
-    // })
-
-    // // Blob.
-    // fetch('https://example.com/spreadsheet.xlsx')
-    //     .then(response => response.blob())
-    //     .then(blob => readXlsxFile(blob))
-    //     .then((rows) => {
-    //         // `rows` is an array of rows
-    //         // each row being an array of cells.
-    //     })
-
-    // // ArrayBuffer.
-    // // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer
-    // //
-    // // Could be obtained from:
-    // // * File
-    // // * Blob
-    // // * Base64 string
-    // //
-    // readXlsxFile(arrayBuffer).then((rows) => {
-    //     // `rows` is an array of rows
-    //     // each row being an array of cells.
-    // })
-
-
-    //FNCIÓN PARA PASAR LA DATA A LA RULETA
-    const data = [
-        { option: '0' },
-        { option: '1' },
-        { option: '2' },
-        { option: '3' },
-        { option: '4' },
-        { option: '5' },
-    ]
-
     const [mustSpin, setMustSpin] = useState(false);
     const [prizeNumber, setPrizeNumber] = useState(0);
+    const [excelData, setExcelData] = useState([]);
+
+    const handleFileChange = async (event) => {
+        console.log("funcione")
+        const file = event.target.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = async (e) => {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+    
+          // Assuming the first sheet is the one you want to read
+          const sheetName = workbook.SheetNames[0];
+          const worksheet = workbook.Sheets[sheetName];
+    
+          const parsedData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+    
+          setExcelData(parsedData);
+        };
+    
+        reader.readAsArrayBuffer(file);
+      };
 
     const handleSpinClick = () => {
         if (!mustSpin) {
@@ -62,6 +41,23 @@ const Roulette = () => {
             setMustSpin(true);
         }
     }
+
+    console.log(excelData)
+
+    const parsedData = excelData.slice(1).map(row => ({
+        nombre: row[0],
+        apellido: row[1],
+        mail: row[2],
+        telefono: row[3],
+      }));
+
+    console.log(parsedData)  
+
+
+        //FNCIÓN PARA PASAR LA DATA A LA RULETA
+        let data = parsedData.map((nombre, index) => ({
+            option: nombre.nombre,
+          }));
 
     //TOAST DE PRUEBA
     const msje = () => {
@@ -97,11 +93,12 @@ const Roulette = () => {
                                             <img src="./src/Images/upload.png" className="img-thumbnail" alt="upload image">
                                             </img>
                                         </label>
-                                        <input className="form-control" type="file" id="formFile"></input>
+                                        <input className="form-control" type="file" id="formFile" onChange={handleFileChange}></input>
                                     </div>
                                 </div>
                             </div>
                             <button className="btn" onClick={msje} id="return-original"> REINICIAR EL CONTENIDO </button>
+                            <pre>{JSON.stringify(excelData, null, 2)}</pre>
                         </div>
                     </div>
                 </div>
