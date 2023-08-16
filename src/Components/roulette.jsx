@@ -4,7 +4,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import React from 'react';
 import { useState } from "react";
 import { Wheel } from 'react-custom-roulette'
-// import XLSX from 'xlsx';
+import XLSX from 'xlsx';
 
 const Roulette = () => {
     const [mustSpin, setMustSpin] = useState(false);
