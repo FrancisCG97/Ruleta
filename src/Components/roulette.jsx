@@ -1,10 +1,10 @@
-//IMPORTS
+// //IMPORTS
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import React from 'react';
 import { useState } from "react";
 import { Wheel } from 'react-custom-roulette'
-// import XLSX from 'xlsx';
+import * as XLSX from 'xlsx';
 
 const Roulette = () => {
     const [mustSpin, setMustSpin] = useState(false);
@@ -21,7 +21,6 @@ const Roulette = () => {
             const data = new Uint8Array(e.target.result);
             const workbook = XLSX.read(data, { type: 'array' });
 
-            // Assuming the first sheet is the one you want to read
             const sheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[sheetName];
 
@@ -41,7 +40,6 @@ const Roulette = () => {
             setMustSpin(true);
         }
     }
-
     console.log(excelData)
 
     const parsedData = excelData.slice(1).map(row => ({
@@ -50,18 +48,15 @@ const Roulette = () => {
         mail: row[2],
         telefono: row[3],
     }));
-
     console.log(parsedData)
-
 
     //FNCIÓN PARA PASAR LA DATA A LA RULETA
     let data = parsedData.map((nombre, index) => ({
         option: nombre.nombre,
     }));
 
-    //TOAST DE PRUEBA
-    const msje = () => {
-        alert('Funciona');
+    const reloadPage = () => {
+        location.reload();
     }
 
     return (
@@ -69,36 +64,43 @@ const Roulette = () => {
             <div className="container" id="wheel">
                 <div className="row" id="wheel-row">
                     <div className="col-10 col-sm-10 col-md-6 col-lg-6 col-xl-6" id="grids">
-                        {mostrarRuleta == true && <Wheel
+                        {mostrarRuleta === false ? (
+                            <div className="img">
+                                <img src="./src/Images/ruleta-inicial.png" className="img-fluid" alt="Imagen ruleta inicial" />
+                            </div>
+                        ) : null}
+                    </div>
+                    {mostrarRuleta === true && (
+                        <Wheel
                             mustStartSpinning={mustSpin}
                             prizeNumber={prizeNumber}
                             data={data}
-
                             onStopSpinning={() => {
                                 setMustSpin(false);
                             }}
-                        />}
-                    </div>
-                    <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" id="button-grids">
-                        <div className="container" id="buttons-container">
-                            <button className="btn" onClick={handleSpinClick} id="spin"> ¡LANZAR LA RULETA! </button>
-                            <div className="card" id="input-file">
-                                <div className="card-body">
-                                    <div className="mb-3">
-                                        <label htmlFor="formFile" className="form-label"> Arrastra aquí un archivo para subir los datos
-                                            <img src="./src/Images/upload.png" className="img-thumbnail" alt="upload image">
-                                            </img>
-                                        </label>
-                                        <input className="form-control" type="file" id="formFile" onChange={handleFileChange}></input>
-                                    </div>
+                        />
+                    )}
+                </div>
+                <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" id="button-grids">
+                    <div className="container" id="buttons-container">
+                        <button className="btn" onClick={handleSpinClick} id="spin"> ¡LANZAR LA RULETA! </button>
+                        <div className="card" id="input-file">
+                            <div className="card-body">
+                                <div className="mb-3">
+                                    <label htmlFor="formFile" className="form-label"> Arrastra aquí un archivo para subir los datos
+                                        <img src="./src/Images/upload.png" className="img-thumbnail" alt="upload image">
+                                        </img>
+                                    </label>
+                                    <input className="form-control" type="file" id="formFile" onChange={handleFileChange}></input>
                                 </div>
                             </div>
-                            <button className="btn" onClick={msje} id="return-original"> VOLVER A ORIGINAL </button>
                         </div>
+                        <button className="btn" onClick={reloadPage} id="return-original"> VOLVER A ORIGINAL </button>
                     </div>
                 </div>
             </div>
         </>
     )
 }
+
 export default Roulette;
