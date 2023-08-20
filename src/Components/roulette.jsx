@@ -50,10 +50,39 @@ const Roulette = () => {
     }));
     console.log(parsedData)
 
-    //FNCIÓN PARA PASAR LA DATA A LA RULETA
+    const colors = [
+        "#acffe9",
+        "#eaff87",
+        "#ff714b",
+        "#c60052",
+        "#31d5de",
+        "#fd65a0",
+        "#b9de51",
+        "#e1b7ed",
+    ];
+
+    const example = [
+        { ejemplo: 1 },
+        { ejemplo: 2 },
+        { ejemplo: 3 },
+        { ejemplo: 4 },
+        { ejemplo: 5 },
+        { ejemplo: 6 },
+    ];
+
+    //FUNCIÓN PARA PASAR LA DATA A LA RULETA
     let data = parsedData.map((nombre, index) => ({
         option: nombre.nombre,
+        style: {
+            backgroundColor: colors[index % colors.length],
+        },
     }));
+
+    if (data.length > colors.length) {
+        data.forEach(option => {
+            option.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        });
+    }
 
     const reloadPage = () => {
         location.reload();
@@ -65,9 +94,9 @@ const Roulette = () => {
                 <div className="row" id="wheel-row">
                     <div className="col-10 col-sm-10 col-md-6 col-lg-6 col-xl-6" id="grids">
                         {mostrarRuleta === false ? (
-                            <div className="img">
-                                <img src="./src/Images/ruleta-inicial.png" className="img-fluid" alt="Imagen ruleta inicial" />
-                            </div>
+                           <Wheel
+                           data={example}
+                       />
                         ) : null}
                     </div>
                     {mostrarRuleta === true && (
