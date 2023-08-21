@@ -1,4 +1,4 @@
-// //IMPORTS
+//IMPORTS
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import React from 'react';
@@ -51,12 +51,12 @@ const Roulette = () => {
     console.log(parsedData)
 
     const colors = [
-        "#acffe9",
+        "#42E8BC",
         "#eaff87",
         "#ff714b",
-        "#c60052",
+        "#F536E9",
         "#31d5de",
-        "#fd65a0",
+        "#FF4990",
         "#b9de51",
         "#e1b7ed",
     ];
@@ -94,9 +94,9 @@ const Roulette = () => {
                 <div className="row" id="wheel-row">
                     <div className="col-10 col-sm-10 col-md-6 col-lg-6 col-xl-6" id="grids">
                         {mostrarRuleta === false ? (
-                           <Wheel
-                           data={example}
-                       />
+                            <Wheel
+                                data={example}
+                            />
                         ) : null}
                     </div>
                     {mostrarRuleta === true && (
