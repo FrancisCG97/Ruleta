@@ -5,6 +5,8 @@ import React from 'react';
 import { useState } from "react";
 import { Wheel } from 'react-custom-roulette'
 import * as XLSX from 'xlsx';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Roulette = () => {
     const [mustSpin, setMustSpin] = useState(false);
@@ -40,7 +42,6 @@ const Roulette = () => {
             setMustSpin(true);
         }
     }
-    console.log(excelData)
 
     const parsedData = excelData.slice(1).map(row => ({
         nombre: row[0],
@@ -90,6 +91,7 @@ const Roulette = () => {
 
     return (
         <>
+        <ToastContainer />
             <div className="container" id="wheel">
                 <div className="row" id="wheel-row">
                     <div className="col-10 col-sm-10 col-md-6 col-lg-6 col-xl-6" id="grids">
@@ -106,6 +108,8 @@ const Roulette = () => {
                             data={data}
                             onStopSpinning={() => {
                                 setMustSpin(false);
+                                const extractedElement = data[prizeNumber];
+                                toast.success("el ganador es :"+" "+ extractedElement.option)
                             }}
                         />
                     )}
