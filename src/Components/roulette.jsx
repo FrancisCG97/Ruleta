@@ -13,6 +13,9 @@ const Roulette = () => {
     const [prizeNumber, setPrizeNumber] = useState(0);
     const [excelData, setExcelData] = useState([]);
     const [mostrarRuleta, setMostrarRuleta] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+
+
 
     const handleFileChange = async (event) => {
         console.log("funcione")
@@ -83,15 +86,18 @@ const Roulette = () => {
         data.forEach(option => {
             option.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         });
+
     }
 
     const reloadPage = () => {
         location.reload();
     }
 
+
+
     return (
         <>
-        <ToastContainer />
+            <ToastContainer />
             <div className="container" id="wheel">
                 <div className="row" id="wheel-row">
                     <div className="col-10 col-sm-10 col-md-6 col-lg-6 col-xl-6" id="grids">
@@ -108,12 +114,56 @@ const Roulette = () => {
                             data={data}
                             onStopSpinning={() => {
                                 setMustSpin(false);
+                                
                                 const extractedElement = data[prizeNumber];
-                                toast.success("el ganador es :"+" "+ extractedElement.option)
+                                setShowModal(true);
+
+                                // {
+                                //     showModal && extractedElement && (
+                                //         <div data-bs-target="#exampleModal" className="modal" tabIndex="-1">
+                                //             <div className="modal-dialog">
+                                //                 <div className="modal-content">
+                                //                     <div className="modal-header">
+                                //                         <h5 className="modal-title">Ganador</h5>
+                                //                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                //                     </div>
+                                //                     <div className="modal-body">
+                                //                         <p>{extractedElement.option}</p>
+                                //                     </div>
+                                //                     <div className="modal-footer">
+                                //                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Volver a lanzar</button>
+                                //                         <button type="button" className="btn btn-primary">Ocultar elemento</button>
+                                //                     </div>
+                                //                 </div>
+                                //             </div>
+                                //         </div>
+                                //     )
+                                // }
+                                //     <div className="modal" tabIndex="1">
+                                //     <div className="modal-dialog">
+                                //         <div className="modal-content">
+                                //             <div className="modal-header">
+                                //                 <h5 className="modal-title">Modal title</h5>
+                                //                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                //             </div>
+                                //             <div className="modal-body">
+                                //                 <p>{extractedElement.option}</p>
+                                //             </div>
+                                //             <div className="modal-footer">
+                                //                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"> Volver a lanzar </button>
+                                //                 <button type="button" className="btn btn-primary"> Ocultar elemento </button>
+                                //             </div>
+                                //         </div>
+                                //     </div>
+                                // </div>
+
+                                //     // extractedElement.addEventListener("show", extractedElement.option)
+                                toast.success("el ganador es :" + " " + extractedElement.option)
                             }}
                         />
                     )}
                 </div>
+
                 <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" id="button-grids">
                     <div className="container" id="buttons-container">
                         <button className="btn" onClick={handleSpinClick} id="spin"> ¡LANZAR LA RULETA! </button>
