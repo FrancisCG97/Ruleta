@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import 'bootstrap/dist/css/bootstrap.css';

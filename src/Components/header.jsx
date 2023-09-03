@@ -1,4 +1,3 @@
-//IMPORTS
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
@@ -18,13 +17,13 @@ const Header = () => {
                             <div className="offcanvas-body">
                                 Para utilizar la Ruleta al azar solo debes seguir las siguientes instrucciones:
                                 <br></br>
-                                1.- Haz click en la sección "Arrastra aquí para subir los datos".
+                                1.- Haz click en la sección: Arrastra aquí para subir los datos.
                                 <br></br>
                                 2.- Elige el archivo con datos que desees subir. Esta página acepta extensiones:
                                 <br></br>
                                 ▶ .xltx - .xls - .xlt - .xlsm - .xlsx - .fods - .ods - .ots - .slk - .uos ◀
                                 <br></br>
-                                3.- Aprieta el botón "¡LANZAR LA RULETA!"
+                                3.- Aprieta el botón ¡LANZAR LA RULETA!
                                 <br></br>
                                 4.- ¡Y listo! Verás el resultado en cuanto la ruleta termine de girar. ¡Suerte!
                             </div>
