@@ -1,11 +1,9 @@
-//IMPORTS
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import React from 'react';
 import { useState } from "react";
 import { Wheel } from 'react-custom-roulette'
 import * as XLSX from 'xlsx';
 import { ToastContainer, toast } from 'react-toastify';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import 'react-toastify/dist/ReactToastify.css';
 
 const Roulette = () => {
@@ -16,11 +14,11 @@ const Roulette = () => {
     const [showModal, setShowModal] = useState(false);
 
 
-
+    //Función para recibir información desde el archivo
     const handleFileChange = async (event) => {
-        console.log("funcione")
         const file = event.target.files[0];
         const reader = new FileReader();
+        console.log(showModal);
 
         reader.onload = async (e) => {
             const data = new Uint8Array(e.target.result);
@@ -38,6 +36,7 @@ const Roulette = () => {
         reader.readAsArrayBuffer(file);
     };
 
+    //Función para calcular al elemento ganador
     const handleSpinClick = () => {
         if (!mustSpin) {
             const newPrizeNumber = Math.floor(Math.random() * data.length);
@@ -46,14 +45,15 @@ const Roulette = () => {
         }
     }
 
+    //Función para convertir data desde el archivo en un array con objetos
     const parsedData = excelData.slice(1).map(row => ({
         nombre: row[0],
         apellido: row[1],
         mail: row[2],
         telefono: row[3],
     }));
-    console.log(parsedData)
 
+    //Array con colores para los elementos de la ruleta
     const colors = [
         "#42E8BC",
         "#eaff87",
@@ -65,6 +65,7 @@ const Roulette = () => {
         "#e1b7ed",
     ];
 
+    //Array con elementos iniciales
     const example = [
         { ejemplo: 1 },
         { ejemplo: 2 },
@@ -74,7 +75,7 @@ const Roulette = () => {
         { ejemplo: 6 },
     ];
 
-    //FUNCIÓN PARA PASAR LA DATA A LA RULETA
+    //Función para mostrar los elementos y colores a la ruleta
     let data = parsedData.map((nombre, index) => ({
         option: nombre.nombre,
         style: {
@@ -86,14 +87,12 @@ const Roulette = () => {
         data.forEach(option => {
             option.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         });
-
     }
 
+    //Función para volver a la ruleta inicial (vacía)
     const reloadPage = () => {
         location.reload();
     }
-
-
 
     return (
         <>
@@ -114,50 +113,8 @@ const Roulette = () => {
                             data={data}
                             onStopSpinning={() => {
                                 setMustSpin(false);
-                                
                                 const extractedElement = data[prizeNumber];
                                 setShowModal(true);
-
-                                // {
-                                //     showModal && extractedElement && (
-                                //         <div data-bs-target="#exampleModal" className="modal" tabIndex="-1">
-                                //             <div className="modal-dialog">
-                                //                 <div className="modal-content">
-                                //                     <div className="modal-header">
-                                //                         <h5 className="modal-title">Ganador</h5>
-                                //                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                //                     </div>
-                                //                     <div className="modal-body">
-                                //                         <p>{extractedElement.option}</p>
-                                //                     </div>
-                                //                     <div className="modal-footer">
-                                //                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Volver a lanzar</button>
-                                //                         <button type="button" className="btn btn-primary">Ocultar elemento</button>
-                                //                     </div>
-                                //                 </div>
-                                //             </div>
-                                //         </div>
-                                //     )
-                                // }
-                                //     <div className="modal" tabIndex="1">
-                                //     <div className="modal-dialog">
-                                //         <div className="modal-content">
-                                //             <div className="modal-header">
-                                //                 <h5 className="modal-title">Modal title</h5>
-                                //                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                //             </div>
-                                //             <div className="modal-body">
-                                //                 <p>{extractedElement.option}</p>
-                                //             </div>
-                                //             <div className="modal-footer">
-                                //                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"> Volver a lanzar </button>
-                                //                 <button type="button" className="btn btn-primary"> Ocultar elemento </button>
-                                //             </div>
-                                //         </div>
-                                //     </div>
-                                // </div>
-
-                                //     // extractedElement.addEventListener("show", extractedElement.option)
                                 toast.success("el ganador es :" + " " + extractedElement.option)
                             }}
                         />

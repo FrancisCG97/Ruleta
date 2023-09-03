@@ -1,4 +1,3 @@
-// IMPORTS
 import Header from './Components/header';
 import Roulette from './Components/roulette';
 import './Home.css';
