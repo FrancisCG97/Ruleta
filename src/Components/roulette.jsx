@@ -136,7 +136,7 @@ const Roulette = () => {
                                 </div>
                             </div>
                         </div>
-                        <button className="btn" onClick={reloadPage} id="return-original"> VOLVER A ORIGINAL </button>
+                        <button className="btn" onClick={reloadPage} id="return-original"> VOLVER A ORIGINAL. </button>
                     </div>
                 </div>
             </div>
