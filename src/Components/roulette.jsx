@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import 'react-toastify/dist/ReactToastify.css';
+import upload from '/src/Images/upload.png'
 
 const Roulette = () => {
     const [mustSpin, setMustSpin] = useState(false);
@@ -128,7 +129,7 @@ const Roulette = () => {
                             <div className="card-body">
                                 <div className="mb-3">
                                     <label htmlFor="formFile" className="form-label"> Arrastra aquí un archivo para subir los datos
-                                        <img src="./src/Images/upload.png" className="img-thumbnail" alt="upload image">
+                                        <img src={upload} className="img-thumbnail" alt="upload image">
                                         </img>
                                     </label>
                                     <input className="form-control" type="file" id="formFile" onChange={handleFileChange}></input>
