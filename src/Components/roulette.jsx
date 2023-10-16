@@ -66,6 +66,7 @@ const Roulette = () => {
         "#e1b7ed",
     ];
 
+    //
     //Array con elementos iniciales
     const example = [
         { ejemplo: 1 },
