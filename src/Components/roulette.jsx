@@ -129,7 +129,7 @@ const Roulette = () => {
                             <div className="card-body">
                                 <div className="mb-3">
                                     <label htmlFor="formFile" className="form-label"> Arrastra aquí un archivo para subir los datos
-                                        <img src={upload} className="img-thumbnail" alt="upload image">
+                                        <img src={ upload } className="img-thumbnail" alt="upload image">
                                         </img>
                                     </label>
                                     <input className="form-control" type="file" id="formFile" onChange={handleFileChange}></input>
